@@ -19,7 +19,7 @@ jobs:
           verbose-output: false
           pi-gen-repository: Life-Radiopharma-Bonn/pi-gen-agilent2herm
           pi-gen-version: master
-          stage-list: stage0 stage1 stage2 stage2-lrp
+          stage-list: stage0 stage1 stage2 stage3
           password: 'LRP@2023'
           increase-runner-disk-size: true
           enable-ssh: 1
