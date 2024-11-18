@@ -18,3 +18,4 @@ jobs:
           image-name: agilent2herm
           verbose-output: true
           pi-gen-repository: Life-Radiopharma-Bonn/pi-gen-agilent2herm
+          pi-gen-version: master
