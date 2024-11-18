@@ -8,4 +8,4 @@ cd agilent2herm/setup/ && \
 bash ./doSetup.sh
 EOF
 echo "setting static ip for non networked stuff"
-#install -m 644 files/01-network-manager-all.yaml "${ROOTFS_DIR}/etc/netplan/01-network-manager-all.yaml"
+install -m 644 files/ethernet-eth0 "${ROOTFS_DIR}/etc/NetworkManager/system-connections/ethernet-eth0"
