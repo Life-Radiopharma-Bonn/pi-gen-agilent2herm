@@ -1,0 +1,20 @@
+name: build-pi
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  TEST: true
+permissions:
+  contents: read
+
+jobs:
+  pi-gen-verbose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: usimd/pi-gen-action@v1
+        with:
+          image-name: agilent2herm
+          verbose-output: true
+          pi-gen-repository: Life-Radiopharma-Bonn/pi-gen-agilent2herm
