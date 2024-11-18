@@ -16,6 +16,19 @@ jobs:
       - uses: usimd/pi-gen-action@v1
         with:
           image-name: agilent2herm
-          verbose-output: true
+          verbose-output: false
           pi-gen-repository: Life-Radiopharma-Bonn/pi-gen-agilent2herm
           pi-gen-version: master
+          stage-list: stage0 stage1 stage2 stage2-lrp
+          password: 'LRP@2023'
+          increase-runner-disk-size: true
+          enable-ssh: 1
+          disable-first-boot-user-rename: 1
+          hostname: agilent2herm-bookworm
+          keyboard-keymap: de
+          keyboard-layout: German
+          locale: en_GB.UTF-8
+          pi-gen-release: Agilent2Herm Bookworm Release
+          pubkey-only-ssh: 0
+          pubkey-ssh-first-user: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCeYoSNzKPAvgAjV2twVGZGNJdfARfH5FVjGzRhPyHkMHu0CbRX23AQzsN8ZPmIQYYdhig5p8+884D8/gPQiutm3UJtbY9cGcNt1L56YRD2ACYQR1jgNr0X6EBue3kmlCaLBy0nZQ6UXsJX/7NO00CapBUVth0fwo1OnTJKq3czquh6LLK2AmJgUjixk3ceHrLxi0imVbfgXGANA5spncUl6i3eY2o3DczbbkGIajwGOmX9/6usmM82YFUPV1TKWfaR4F45FQl4uUzCH8b2bN1wAK/Fvmju2h0eEO/Z+J0/7HyKvgCyk5zM2lbVexzKoXGZTSNZt66C7/odTjpMy4jI0f9GgTpyn+qXPduXrjMso5+Ss8qIjV/BcWbhyHJqRA7fo1FoSQrCuXuezMPbxiPIXI/4vlYD8qCifN6Ah5/3A7R8djZ8zCkRwRCHYx52gEqYLcStSFuFlsyzpI+pK/lVavfN8/cmhe8sxni/PDKoGkjSPvzkkPaS3GcoruUQa98= mcpharma\mauel@LRP-Bonn-mauel'
+          username: rp
