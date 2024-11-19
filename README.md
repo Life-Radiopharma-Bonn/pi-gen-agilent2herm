@@ -1,4 +1,6 @@
-# pi-gen
+# pi-gen-agilent2herm
+
+[![build-pi](https://github.com/Life-Radiopharma-Bonn/pi-gen-agilent2herm/actions/workflows/main.yml/badge.svg)](https://github.com/Life-Radiopharma-Bonn/pi-gen-agilent2herm/actions/workflows/main.yml)
 
 Tool used to create Raspberry Pi OS images, and custom images based on Raspberry Pi OS,
 which was in turn derived from the Raspbian project.
