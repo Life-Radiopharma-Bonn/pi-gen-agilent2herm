@@ -32,3 +32,7 @@ jobs:
           pubkey-only-ssh: 0
           pubkey-ssh-first-user: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCeYoSNzKPAvgAjV2twVGZGNJdfARfH5FVjGzRhPyHkMHu0CbRX23AQzsN8ZPmIQYYdhig5p8+884D8/gPQiutm3UJtbY9cGcNt1L56YRD2ACYQR1jgNr0X6EBue3kmlCaLBy0nZQ6UXsJX/7NO00CapBUVth0fwo1OnTJKq3czquh6LLK2AmJgUjixk3ceHrLxi0imVbfgXGANA5spncUl6i3eY2o3DczbbkGIajwGOmX9/6usmM82YFUPV1TKWfaR4F45FQl4uUzCH8b2bN1wAK/Fvmju2h0eEO/Z+J0/7HyKvgCyk5zM2lbVexzKoXGZTSNZt66C7/odTjpMy4jI0f9GgTpyn+qXPduXrjMso5+Ss8qIjV/BcWbhyHJqRA7fo1FoSQrCuXuezMPbxiPIXI/4vlYD8qCifN6Ah5/3A7R8djZ8zCkRwRCHYx52gEqYLcStSFuFlsyzpI+pK/lVavfN8/cmhe8sxni/PDKoGkjSPvzkkPaS3GcoruUQa98= mcpharma\mauel@LRP-Bonn-mauel'
           username: rp
+      - uses: actions/upload-artifact@v3
+        with:
+          name: agilent2herm-bookworm
+          path: ${{ steps.build.outputs.image-path }}
