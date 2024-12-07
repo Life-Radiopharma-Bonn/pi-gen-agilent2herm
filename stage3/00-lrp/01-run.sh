@@ -12,47 +12,20 @@ install -m 600 files/ethernet-eth0 "${ROOTFS_DIR}/etc/NetworkManager/system-conn
 
 echo "Installing Rabbitmq dependencies"
 on_chroot << EOF
-	sudo apt-get install curl gnupg apt-transport-https -y
+	 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove -y $pkg; done
+	  sudo apt-get update
+	sudo apt-get install ca-certificates curl
+	sudo install -m 0755 -d /etc/apt/keyrings
+	sudo curl -fsSL https://download.docker.com/linux/raspbian/gpg -o /etc/apt/keyrings/docker.asc
+	sudo chmod a+r /etc/apt/keyrings/docker.asc
 	
-	## Team RabbitMQ's main signing key
-	curl -1sLf "https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA" | sudo gpg --dearmor | sudo tee /usr/share/keyrings/com.rabbitmq.team.gpg > /dev/null
-	## Community mirror of Cloudsmith: modern Erlang repository
-	curl -1sLf https://github.com/rabbitmq/signing-keys/releases/download/3.0/cloudsmith.rabbitmq-erlang.E495BB49CC4BBE5B.key | sudo gpg --dearmor | sudo tee /usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg > /dev/null
-	## Community mirror of Cloudsmith: RabbitMQ repository
-	curl -1sLf https://github.com/rabbitmq/signing-keys/releases/download/3.0/cloudsmith.rabbitmq-server.9F4587F226208342.key | sudo gpg --dearmor | sudo tee /usr/share/keyrings/rabbitmq.9F4587F226208342.gpg > /dev/null
-	
-	## Add apt repositories maintained by Team RabbitMQ
-	sudo tee /etc/apt/sources.list.d/rabbitmq.list <<EOFS
-	## Provides modern Erlang/OTP releases
-	##
-	deb [arch=amd64 signed-by=/usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg] https://ppa1.rabbitmq.com/rabbitmq/rabbitmq-erlang/deb/debian bookworm main
-	deb-src [signed-by=/usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg] https://ppa1.rabbitmq.com/rabbitmq/rabbitmq-erlang/deb/debian bookworm main
-	
-	# another mirror for redundancy
-	deb [arch=amd64 signed-by=/usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg] https://ppa2.rabbitmq.com/rabbitmq/rabbitmq-erlang/deb/debian bookworm main
-	deb-src [signed-by=/usr/share/keyrings/rabbitmq.E495BB49CC4BBE5B.gpg] https://ppa2.rabbitmq.com/rabbitmq/rabbitmq-erlang/deb/debian bookworm main
-	
-	## Provides RabbitMQ
-	##
-	deb [arch=amd64 signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://ppa1.rabbitmq.com/rabbitmq/rabbitmq-server/deb/debian bookworm main
-	deb-src [signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://ppa1.rabbitmq.com/rabbitmq/rabbitmq-server/deb/debian bookworm main
-	
-	# another mirror for redundancy
-	deb [arch=amd64 signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://ppa2.rabbitmq.com/rabbitmq/rabbitmq-server/deb/debian bookworm main
-	deb-src [signed-by=/usr/share/keyrings/rabbitmq.9F4587F226208342.gpg] https://ppa2.rabbitmq.com/rabbitmq/rabbitmq-server/deb/debian bookworm main
-	EOFS
-	
-	## Update package indices
+	# Add the repository to Apt sources:
+	echo \
+	  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/raspbian \
+	  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+	  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 	sudo apt-get update -y
-	
-	## Install Erlang packages
-	sudo apt-get install -y erlang-base \
-	                        erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets \
-	                        erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \
-	                        erlang-runtime-tools erlang-snmp erlang-ssl \
-	                        erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl
-	
-	## Install rabbitmq-server and its dependencies
-	sudo apt-get install rabbitmq-server -y --fix-missing
- 	systemctl enable rabbitmq-server
+
+ 	 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   	docker pull rabbitmq
 EOF
