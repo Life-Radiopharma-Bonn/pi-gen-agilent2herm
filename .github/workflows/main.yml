@@ -43,7 +43,7 @@ jobs:
       - uses: usimd/pi-gen-action@v1
         id: build
         with:
-          image-name: agilent2herm
+          image-name: agilent2herm-rabbitmq
           verbose-output: false
           pi-gen-repository: Life-Radiopharma-Bonn/pi-gen-agilent2herm
           pi-gen-version: rabbitmq-rebuild
