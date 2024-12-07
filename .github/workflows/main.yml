@@ -17,7 +17,7 @@ jobs:
         id: build
         with:
           image-name: agilent2herm-rabbitmq
-          verbose-output: false
+          verbose-output: true
           pi-gen-repository: Life-Radiopharma-Bonn/pi-gen-agilent2herm
           pi-gen-version: rabbitmq-rebuild
           stage-list: stage0 stage1 stage2 stage3
