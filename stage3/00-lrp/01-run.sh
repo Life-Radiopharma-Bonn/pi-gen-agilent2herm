@@ -10,6 +10,7 @@ EOF
 echo "setting static ip for non networked stuff"
 install -m 600 files/ethernet-eth0 "${ROOTFS_DIR}/etc/NetworkManager/system-connections/ethernet-eth0"
 
+mount -o bind /proc "${ROOTFS_DIR}/proc"
 echo "Installing Rabbitmq dependencies"
 on_chroot << EOF
 	 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove -y $pkg; done
@@ -28,4 +29,5 @@ on_chroot << EOF
 
  	 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    	docker pull rabbitmq
+    	umount /proc
 EOF
