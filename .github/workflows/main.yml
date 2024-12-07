@@ -2,7 +2,7 @@ name: build-pi
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "rabbitmq-rebuild" ]
 
 env:
   TEST: true
