@@ -15,3 +15,6 @@ echo "Installing Rabbitmq dependencies"
 on_chroot << EOF
 	sudo apt-get update && apt-get upgrade -y && apt-get install -y rabbitmq-server && systemctl enable rabbitmq-server
 EOF
+on_chroot << EOF
+  systemctl disable avahi-daemon
+EOF
