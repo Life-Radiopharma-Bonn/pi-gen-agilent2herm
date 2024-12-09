@@ -9,3 +9,6 @@ bash ./doSetup.sh
 EOF
 echo "setting static ip for non networked stuff"
 install -m 600 files/ethernet-eth0 "${ROOTFS_DIR}/etc/NetworkManager/system-connections/ethernet-eth0"
+on_chroot << EOF
+  systemctl disable avahi-daemon
+EOF
