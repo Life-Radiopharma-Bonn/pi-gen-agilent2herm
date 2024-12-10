@@ -18,3 +18,6 @@ EOF
 on_chroot << EOF
   systemctl disable avahi-daemon
 EOF
+on_chroot << EOF
+  systemctl disable systemd-timesyncd
+EOF
