@@ -3,9 +3,8 @@ echo "Running stage2-lrp"
 on_chroot << EOF
 cd /root/ && \
 rm -rf agilent2herm && \
-git clone https://github.com/Life-Radiopharma-Bonn/agilent2herm.git && \
+git clone --single-branch --branch rabbitmq https://github.com/Life-Radiopharma-Bonn/agilent2herm.git && \
 cd agilent2herm/setup/ && \
-git checkout -b rabbitmq && \
 bash ./doSetup.sh
 EOF
 echo "setting static ip for non networked stuff"
